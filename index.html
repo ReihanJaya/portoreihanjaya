@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Reihan Jaya Prasetiono</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        
+        body { 
+            background: radial-gradient(circle at 50% -10%, #16213a 0%, #0b0f19 42%, #070a11 100%); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Canvas Particle Background */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card { 
+            background: rgba(15, 23, 42, 0.72); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transform-style: preserve-3d;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Custom Floating Neon Glows */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatGlow 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 40px) scale(1.15); }
+        }
+
+        /* Custom Glowing Cursor Follower */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #38bdf8;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-outline {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(56, 189, 248, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Interactive Canvas Particles -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Custom Glowing Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Background Glowing Orbs -->
+    <div class="glow-orb w-[400px] h-[400px] bg-blue-600 top-10 left-[-150px]"></div>
+    <div class="glow-orb w-[400px] h-[400px] bg-purple-600 top-[45%] right-[-150px]"></div>
+    <div class="glow-orb w-[350px] h-[350px] bg-cyan-500 bottom-10 left-1/3"></div>
+
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-5 md:px-10 lg:px-20 py-4 sticky top-0 bg-[#0b0f19]/70 backdrop-blur-xl z-50 border-b border-slate-800/60 transition-all duration-300">
+        <div class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">
+            Reihan Jaya Prasetiono
+        </div>
+        <button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl border border-slate-700 bg-slate-900/70 text-slate-300" aria-label="Buka menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul id="navMenu" class="hidden md:flex gap-8 text-sm font-medium text-slate-300 absolute md:static top-full left-0 right-0 md:bg-transparent bg-[#0b0f19]/95 md:p-0 p-5 border-b md:border-0 border-slate-800 flex-col md:flex-row">
+            <li><a href="#home" class="hover:text-blue-400 transition-colors">Home</a></li>
+            <li><a href="#tentang" class="hover:text-blue-400 transition-colors">Tentang</a></li>
+            <li><a href="#proyek" class="hover:text-blue-400 transition-colors">Proyek</a></li>
+            <li><a href="#kontak" class="hover:text-yellow-400 transition-colors">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative z-10 pt-10">
+        <div class="relative mb-8" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="absolute -inset-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 rounded-full blur-lg opacity-80 animate-pulse"></div>
+            <div class="w-36 h-36 md:w-44 md:h-44 rounded-full relative overflow-hidden border-2 border-white/20 shadow-2xl">
+                <img src="foto.jpeg" alt="Reihan Jaya Prasetiono" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight" data-aos="fade-up" data-aos-delay="200">
+            Halo, Saya <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">Reihan Jaya Prasetiono</span>
+        </h1>
+
+        <!-- Typing Dynamic Text -->
+        <p class="text-lg md:text-2xl text-slate-400 mb-10 font-light h-8" data-aos="fade-up" data-aos-delay="400">
+            Saya seorang <span id="typed" class="text-blue-400 font-semibold border-b-2 border-blue-400 pb-0.5"></span>
+        </p>
+
+        <div data-aos="fade-up" data-aos-delay="600">
+            <a href="#proyek" class="group relative inline-flex items-center justify-center px-9 py-4 text-base font-bold text-white transition-all bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-lg shadow-blue-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95">
+                <span>Lihat Proyek Saya</span>
+                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Tentang Saya -->
+    <!-- Tentang Saya -->
+    <section id="tentang" class="py-24 px-6 md:px-20 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-blue-400 border-l-4 border-blue-500 pl-4" data-aos="fade-right">
+                Tentang Saya
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Frame Foto yang Ditingkatkan -->
+                <div class="relative group mx-auto w-full max-w-md" data-aos="fade-right" data-aos-delay="200">
+                    <!-- Glow effect di belakang frame -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl blur-lg opacity-40 group-hover:opacity-70 transition duration-500"></div>
+                    
+                    <!-- Glass Container untuk Foto -->
+                    <div class="tilt-card glass-card p-3 rounded-2xl relative overflow-hidden aspect-[4/5] sm:aspect-square md:aspect-[4/5] flex items-center justify-center">
+                        <img src="background putih.png" class="rounded-xl w-full h-full object-cover object-center shadow-inner" alt="Foto Reihan Jaya Prasetiono">
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-delay="300">
+                    <div class="space-y-4 mb-8">
+                        <p class="flex items-center gap-3 text-slate-300"><i class="fas fa-user text-blue-400 w-5"></i> <span class="font-semibold">Nama:</span> Reihan Jaya Prasetiono</p>
+                        <p class="flex items-center gap-3 text-slate-300"><i class="fas fa-map-marker-alt text-blue-400 w-5"></i> <span class="font-semibold">Domisili:</span> DKI Jakarta</p>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                        <i class="fas fa-graduation-cap text-blue-400"></i> Pendidikan
+                    </h3>
+                    <div class="border-l-2 border-blue-500/30 pl-6 space-y-6">
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[31px] top-1.5 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
+                            <p class="text-xs text-blue-400 font-bold uppercase tracking-wider">2023 - 2026</p>
+                            <h4 class="font-bold text-white text-base">SMK Negeri 10 Jakarta</h4>
+                            <p class="text-sm text-slate-400">Jurusan Rekayasa Perangkat Lunak (RPL)</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                            <i class="fas fa-code text-blue-400"></i> Keahlian
+                        </h3>
+                        <div class="flex flex-wrap gap-2.5">
+                            <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20 text-xs font-semibold hover:bg-blue-500/30 hover:scale-105 transition-all">HTML & CSS</span>
+                            <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20 text-xs font-semibold hover:bg-blue-500/30 hover:scale-105 transition-all">PHP & Laravel</span>
+                            <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20 text-xs font-semibold hover:bg-blue-500/30 hover:scale-105 transition-all">Tailwind CSS</span>
+                            <span class="px-4 py-1.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20 text-xs font-semibold hover:bg-blue-500/30 hover:scale-105 transition-all">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyek Saya -->
+    <section id="proyek" class="py-24 px-6 md:px-10 relative z-10 border-y border-slate-800/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
+                    Portfolio
+                </span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white">Proyek Unggulan</h2>
+                <p class="text-slate-400 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+                    Beberapa website dan aplikasi yang pernah saya buat.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Project 1
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                   class="tilt-card glass-card rounded-2xl overflow-hidden block group h-full"
+                   data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-blue-950/40 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5"></div>
+                        <i class="fas fa-warehouse text-5xl text-blue-400 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6 flex flex-col h-[190px]">
+                        <h3 class="font-bold text-lg text-white mb-2 group-hover:text-blue-400 transition-colors">
+                            Gudang / Warehouse
+                        </h3>
+                        <p class="text-sm leading-6 text-slate-400 mb-5">
+                            Sistem manajemen inventory dan supplier berbasis web.
+                        </p>
+                        <span class="mt-auto text-blue-400 text-xs font-bold flex items-center gap-2">
+                            Lihat Detail <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a> -->
+
+                <!-- Project 2 -->
+                <a href="https://harapan-bangsa-nfyz.vercel.app/" target="_blank" rel="noopener noreferrer"
+                   class="tilt-card glass-card rounded-2xl overflow-hidden block group h-full"
+                   data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 bg-amber-950/40 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-orange-500/5"></div>
+                        <i class="fas fa-school text-5xl text-amber-400 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6 flex flex-col h-[190px]">
+                        <h3 class="font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                            Website TK
+                        </h3>
+                        <p class="text-sm leading-6 text-slate-400 mb-5">
+                            Website profil sekolah dengan UI interaktif untuk orang tua.
+                        </p>
+                        <span class="mt-auto text-amber-400 text-xs font-bold flex items-center gap-2">
+                            Lihat Detail <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://invoice-tyxq.vercel.app/" target="_blank" rel="noopener noreferrer"
+                   class="tilt-card glass-card rounded-2xl overflow-hidden block group h-full"
+                   data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 bg-emerald-950/40 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/5"></div>
+                        <i class="fas fa-file-invoice-dollar text-5xl text-emerald-400 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6 flex flex-col h-[190px]">
+                        <h3 class="font-bold text-lg text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                            Invoice Manager
+                        </h3>
+                        <p class="text-sm leading-6 text-slate-400 mb-5">
+                            Aplikasi untuk membuat invoice dan mengelola laporan transaksi.
+                        </p>
+                        <span class="mt-auto text-emerald-400 text-xs font-bold flex items-center gap-2">
+                            Lihat Detail <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://website-umkm-nine.vercel.app/" target="_blank" rel="noopener noreferrer"
+                   class="tilt-card glass-card rounded-2xl overflow-hidden block group h-full"
+                   data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-48 bg-violet-950/40 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/5"></div>
+                        <i class="fas fa-qrcode text-5xl text-violet-400 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6 flex flex-col h-[190px]">
+                        <h3 class="font-bold text-lg text-white mb-2 group-hover:text-violet-400 transition-colors">
+                            OrderIn
+                        </h3>
+                        <p class="text-sm leading-6 text-slate-400 mb-5">
+                            Sistem pemesanan kuliner dan digital menu berbasis QR.
+                        </p>
+                        <span class="mt-auto text-violet-400 text-xs font-bold flex items-center gap-2">
+                            Lihat Detail <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-24 px-6 relative z-10">
+        <div class="tilt-card max-w-4xl mx-auto bg-gradient-to-b from-slate-800/80 to-slate-900/90 p-10 md:p-14 rounded-3xl text-center border border-slate-700/60 shadow-2xl backdrop-blur-xl" data-aos="zoom-in">
+            <h2 class="text-3xl font-bold mb-4 text-yellow-400">Mari Bekerja Sama</h2>
+            <p class="text-slate-300 mb-10 text-sm md:text-base max-w-xl mx-auto">
+                Tertarik untuk membangun proyek web bersama atau sekadar ingin berdiskusi? Jangan ragu untuk menghubungi saya!
+            </p>
+            <div class="flex justify-center gap-8 text-3xl">
+                <!-- Email -->
+                <a href="mailto:reihanjayaprasetiono@gmail.com" title="Email" class="p-4 bg-slate-800/80 hover:bg-blue-600 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-700 text-slate-300 hover:text-white shadow-lg">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <!-- Instagram -->
+                <a href="https://instagram.com/reihan14811y" target="_blank" rel="noopener noreferrer" title="Instagram" class="p-4 bg-slate-800/80 hover:bg-pink-600 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-700 text-slate-300 hover:text-white shadow-lg">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6283871670131" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="p-4 bg-slate-800/80 hover:bg-emerald-600 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-700 text-slate-300 hover:text-white shadow-lg">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-slate-500 text-xs border-t border-slate-800/80 relative z-10">
+        <p>&copy; Membangun pengalaman web masa depan, piksel demi piksel.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        // 1. Initialize Scroll Animation
+        AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+        // Mobile navigation
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        menuBtn?.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+        navMenu?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.add('hidden'));
+        });
+
+        // 2. Initialize Typing Effect
+        new Typed('#typed', {
+            strings: ['Frontend Developer', 'Web Designer', 'UI/UX Enthusiast'],
+            typeSpeed: 60, backSpeed: 40, loop: true, backDelay: 1500
+        });
+
+        // 3. Initialize 3D Card Tilt Effect
+        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+            max: 12,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2
+        });
+
+        // 4. Custom Cursor Movement
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.transform = `translate(${posX - 4}px, ${posY - 4}px)`;
+            cursorOutline.style.transform = `translate(${posX - 18}px, ${posY - 18}px)`;
+        });
+
+        // 5. Interactive Canvas Particle Background
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        const mouse = { x: null, y: null, radius: 120 };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y;
+                this.directionX = directionX; this.directionY = directionY;
+                this.size = size; this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+
+                // Mouse interaction
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 12000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.8) - 0.4;
+                let directionY = (Math.random() * 0.8) - 0.4;
+                particlesArray.push(new Particle(x, y, directionX, directionY, size));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connectParticles();
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 9) * (canvas.height / 9)) {
+                        let opacityValue = 1 - (distance / 10000);
+                        ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue * 0.15 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
